@@ -9,14 +9,14 @@ COPY package*.json ./
 # Instalar dependencias base
 RUN npm install
 
-# Instalar TailwindCSS + nuevo plugin PostCSS + Autoprefixer
-RUN npm install -D tailwindcss @tailwindcss/postcss postcss autoprefixer
+# # Instalar TailwindCSS + nuevo plugin PostCSS + Autoprefixer
+# RUN npm install -D tailwindcss @tailwindcss/postcss postcss autoprefixer
 
-# Crear archivo Tailwind config
-RUN echo 'export default { content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"], theme: { extend: {} }, plugins: [], }' > tailwind.config.js
+# # Crear archivo Tailwind config
+# RUN echo 'export default { content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"], theme: { extend: {} }, plugins: [], }' > tailwind.config.js
 
-# Crear archivo PostCSS config (usando el nuevo paquete)
-RUN echo 'export default { plugins: { "@tailwindcss/postcss": {}, autoprefixer: {}, }, }' > postcss.config.js
+# # Crear archivo PostCSS config (usando el nuevo paquete)
+# RUN echo 'export default { plugins: { "@tailwindcss/postcss": {}, autoprefixer: {}, }, }' > postcss.config.js
 
 
 # Copiar el resto del código fuente
@@ -31,5 +31,5 @@ FROM nginx:stable-alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist /usr/share/nginx/html
 
-EXPOSE 3000
+EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]
